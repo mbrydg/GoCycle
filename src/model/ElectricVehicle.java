@@ -24,7 +24,7 @@ public abstract class ElectricVehicle extends Vehicle {
     }
 
     public boolean hasSufficientBattery() {
-        return batteryLevel >= MINIMUM_RENTAL_BATTERY;
+        return batteryLevel >= MinimumRentalBattery;
     }
 
     @Override
