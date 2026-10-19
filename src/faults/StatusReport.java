@@ -11,15 +11,22 @@ public class StatusReport {
 
     private final Source source;
 
+    private final String sourceId;
+
     private final String statusString;
 
-    public StatusReport (Source source, String statusString) {
+    public StatusReport (Source source, String sourceId, String statusString) {
         this.source = source;
+        this.sourceId = sourceId;
         this.statusString = statusString;
     }
 
     public Source getSource() {
         return source;
+    }
+
+    public String getSourceId() {
+        return sourceId;
     }
 
     public String getStatusString() {

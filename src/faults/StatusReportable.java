@@ -1,9 +1,8 @@
 package faults;
 
 public interface StatusReportable {
-    String getId();
 
-    StatusReport reportStatus();
+    String getId();
 
     void attachStatusObserver(StatusObserver observer);
     void removeStatusObserver(StatusObserver observer);
