@@ -29,7 +29,7 @@ GoCycle is a shared bike and scooter rental system developed in Java. The projec
 - Supports handling vehicles that are taken out of service.
 
 ## Project Structure
-- `src/model/` - Vehicles, docking stations and points, riders, trips.
+- `src/model/` - Vehicles, docking stations and points, riders, trips, and model tests.
 - `src/pricing/` - Pricing strategies, trip cost calculator, and pricing tests.
 - `src/faults/` - Fault reporting, notification components, and fault tests.
 
@@ -61,6 +61,12 @@ Run the fault-reporting tests:
 
 ```bash
 java -cp build faults.FaultTest
+```
+
+Run the model tests:
+
+```bash
+java -cp build model.ModelTest
 ```
 
 These commands run the individual test programs. The project does not currently provide a single application entry point.
