@@ -46,7 +46,7 @@ public class DockingPoint implements StatusReportable {
                 new StringBuilder()
                         .append(getId())
                         .append(" | ")
-                        .append("Location: ")
+                        .append("Station: ")
                         .append(getStation().getName())
                         .append(" | ")
                         .append(isOccupied() ? getVehicle().getVehicleType() : "None")
