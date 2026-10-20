@@ -1,14 +1,20 @@
 package model;
 
+import faults.StatusObserver;
+import faults.StatusReport;
+import faults.StatusReportable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class DockingStation {
+public class DockingStation implements StatusReportable {
 
     private final String id;
     private final String name;
     private final List<DockingPoint> dockingPoints;
+
+    private final List<StatusObserver> observers = new ArrayList<>();
 
     public DockingStation(String id, String name) {
         if (id == null || id.isBlank()) {
@@ -26,6 +32,36 @@ public class DockingStation {
 
     public String getId() {
         return id;
+    }
+
+    @Override
+    public void attachStatusObserver(StatusObserver observer) {
+        if (observer != null && !observers.contains(observer)) {
+            observers.add(observer);
+        }
+    }
+
+    @Override
+    public void removeStatusObserver(StatusObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyStatusObservers() {
+        StatusReport status = new StatusReport(StatusReport.Source.DOCKINGSTATION,
+                this.getId(),
+                new StringBuilder()
+                        .append(getId())
+                        .append(" | ")
+                        .append("Location: ")
+                        .append(getName())
+                        .append(" | ")
+                        .append("Docking Points: ")
+                        .append(getDockingPoints().size())
+                        .toString());
+        for (StatusObserver observer : new ArrayList<>(observers)) {
+            observer.onStatusReported(status);
+        }
     }
 
     public String getName() {
