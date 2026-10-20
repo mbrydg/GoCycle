@@ -10,19 +10,26 @@ GoCycle is a shared bike and scooter rental system developed in Java. The projec
 
 ## Implemented Features
 
-### 1. Pricing System - Strategy Pattern
+### 1. Vehicles, Docking, and Trips (`model`)
+- Pedal bikes, electric bikes, and electric scooters, built on a common `Vehicle` base class
+- Docking stations with docking points where vehicles are docked and released
+- Electric vehicles can only be rented above a minimum battery level
+- Riders hold a pricing strategy
+- A trip is started and ended at docking points, and its cost is calculated when it ends.
+
+### 2. Pricing System - Strategy Pattern
 - Supports casual, member, and student pricing.
 - Calculates trip costs using an unlock fee and per-minute rate.
 - Applies a surcharge for trips longer than 120 minutes.
 - Allows new pricing strategies to be added easily.
 
-### 2. Fault Reporting - Observer Pattern
+### 3. Fault Reporting - Observer Pattern
 - Supports vehicle fault reporting and notifications.
 - Notifies relevant maintenance and control room components.
 - Supports handling vehicles that are taken out of service.
 
 ## Project Structure
-
+- `src/model/` - Vehicles, docking stations and points, riders, trips.
 - `src/pricing/` - Pricing strategies, trip cost calculator, and pricing tests.
 - `src/faults/` - Fault reporting, notification components, and fault tests.
 
@@ -39,7 +46,7 @@ Compile all Java source files:
 
 ```bash
 mkdir -p build
-javac -d build src/pricing/*.java src/faults/*.java
+javac -d build src/pricing/*.java src/faults/*.java src/model/*.java
 ```
 
 ## Run Instructions
