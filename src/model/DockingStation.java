@@ -48,7 +48,7 @@ public class DockingStation implements StatusReportable {
 
     @Override
     public void notifyStatusObservers() {
-        StatusReport status = new StatusReport(StatusReport.Source.DOCKINGPOINT,
+        StatusReport status = new StatusReport(StatusReport.Source.DOCKINGSTATION,
                 this.getId(),
                 new StringBuilder()
                         .append(getId())

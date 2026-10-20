@@ -36,7 +36,7 @@ public abstract class ElectricVehicle extends Vehicle {
         statusString.append("Battery Level: ");
         statusString.append(getBatteryLevel());
 
-        StatusReport status = new StatusReport(StatusReport.Source.DOCKINGPOINT,
+        StatusReport status = new StatusReport(StatusReport.Source.E_VEHICLE,
                 this.getId(),statusString.toString());
         for (StatusObserver observer : new ArrayList<>(observers)) {
             observer.onStatusReported(status);

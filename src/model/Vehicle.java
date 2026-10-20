@@ -64,7 +64,7 @@ public abstract class Vehicle implements FaultTarget, StatusReportable {
         }
         statusString.append(currStatus);
 
-        StatusReport status = new StatusReport(StatusReport.Source.DOCKINGPOINT,
+        StatusReport status = new StatusReport(StatusReport.Source.VEHICLE,
                 this.getId(),statusString.toString());
         for (StatusObserver observer : new ArrayList<>(observers)) {
             observer.onStatusReported(status);

@@ -1,5 +1,7 @@
 package faults;
 
+import java.util.Objects;
+
 public class StatusReport {
 
     public enum Source {
@@ -31,5 +33,14 @@ public class StatusReport {
 
     public String getStatusString() {
         return statusString;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+        StatusReport other = (StatusReport) obj;
+        return Objects.equals(this.getSourceId(), other.getSourceId());
     }
 }
