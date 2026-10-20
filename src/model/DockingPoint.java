@@ -1,10 +1,19 @@
 package model;
 
-public class DockingPoint {
+import faults.StatusObserver;
+import faults.StatusReport;
+import faults.StatusReportable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DockingPoint implements StatusReportable {
 
     private final String id;
     private DockingStation station;
     private Vehicle vehicle;
+
+    private final List<StatusObserver> observers = new ArrayList<>();
 
     public DockingPoint(String id) {
         if (id == null || id.isBlank()) {
@@ -16,6 +25,35 @@ public class DockingPoint {
 
     public String getId() {
         return id;
+    }
+
+    @Override
+    public void attachStatusObserver(StatusObserver observer) {
+        if (observer != null && !observers.contains(observer)) {
+            observers.add(observer);
+        }
+    }
+
+    @Override
+    public void removeStatusObserver(StatusObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyStatusObservers() {
+        StatusReport status = new StatusReport(StatusReport.Source.DOCKINGPOINT,
+                this.getId(),
+                new StringBuilder()
+                        .append(getId())
+                        .append(" | ")
+                        .append("Location: ")
+                        .append(getStation().getName())
+                        .append(" | ")
+                        .append(isOccupied() ? getVehicle().getVehicleType() : "None")
+                        .toString());
+        for (StatusObserver observer : new ArrayList<>(observers)) {
+            observer.onStatusReported(status);
+        }
     }
 
     public DockingStation getStation() {
@@ -61,6 +99,7 @@ public class DockingPoint {
 
         this.vehicle = vehicle;
         vehicle.setDockingPoint(this);
+        notifyStatusObservers();
     }
 
     public Vehicle releaseVehicle() {
@@ -71,6 +110,7 @@ public class DockingPoint {
         Vehicle released = vehicle;
         vehicle = null;
         released.setDockingPoint(null);
+        notifyStatusObservers();
 
         return released;
     }
