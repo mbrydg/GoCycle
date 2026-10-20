@@ -20,7 +20,7 @@ public abstract class Vehicle implements FaultTarget, StatusReportable {
     private Status status;
     private DockingPoint dockingPoint;
 
-    private final List<StatusObserver> observers = new ArrayList<>();
+    protected final List<StatusObserver> observers = new ArrayList<>();
 
     protected Vehicle(String id) {
         if (id == null || id.isBlank()) {
